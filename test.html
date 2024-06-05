@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elevator System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #building {
+      position: relative;
+      width: 200px;
+      border: 1px solid #000;
+    }
+
+    .floor {
+      position: relative;
+      height: 110px;
+      background-color: lightgray;
+      border-bottom: 7px solid black;
+    }
+
+    .button {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .elevator {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: blue;
+      transition: top 0.5s ease;
+    }
+
+    .elevator1 {
+      left: 0;
+    }
+
+    .elevator2 {
+      left: 60px;
+    }
+
+    .elevator3 {
+      left: 120px;
+    }
+  </style>
+</head>
+<body>
+  <div id="building"></div>
+  <div class="elevator elevator1"></div>
+  <div class="elevator elevator2"></div>
+  <div class="elevator elevator3"></div>
+  <script>
+    class Floor {
+      constructor(floornum, main, height, timer) {
+        this.floornum = floornum;
+        this.main = main;
+        this.height = height;
+        this.timer = timer;
+      }
+    }
+
+    class Elevetr {
+      constructor(numl, time, even, place) {
+        this.numl = numl;
+        this.time = time;
+        this.even = even;
+        this.place = place;
+      }
+    }
+
+    const building = document.getElementById('building');
+    const new_list_of_floors = [];
+
+    for (let i = 24; i >= 0; i--) {
+      let floorDiv = document.createElement("div");
+      floorDiv.classList.add('floor');
+
+      let floorNumber = document.createElement("p");
+      floorNumber.textContent = i;
+      floorDiv.appendChild(floorNumber);
+
+      let buttonA = document.createElement("button");
+      buttonA.textContent = "a";
+      buttonA.onclick = () => moveElevator('.elevator2', -(i) * 117);
+      floorDiv.appendChild(buttonA);
+
+      let buttonB = document.createElement("button");
+      buttonB.textContent = "b";
+      buttonB.onclick = () => moveElevator('.elevator1', -(i) * 117);
+      floorDiv.appendChild(buttonB);
+
+      let buttonC = document.createElement("button");
+      buttonC.textContent = "c";
+      buttonC.onclick = () => moveElevator('.elevator3', -(i) * 117);
+      floorDiv.appendChild(buttonC);
+
+      building.appendChild(floorDiv);
+
+      let floora = new Floor(i, floorDiv, -(i) * 117, 0);
+      new_list_of_floors.push(floora);
+    }
+
+    console.log(new_list_of_floors);
+
+    const elevators = [];
+
+    for (let i = 1; i <= 3; i++) {
+      const numl = i;
+      const time = `time${i}`;
+      const even = `even${i}`;
+      const place = 0;
+      var elevatora = new Elevetr(numl, time, even, place);
+      elevators.push(elevatora);
+    }
+
+    console.log(elevators);
+
+    function moveElevator(elevatorClass, height) {
+      var elevator = document.querySelector(elevatorClass);
+      elevator.style.top = `${height}px`;
+    }
+
+    window.onclicka = function(height) {
+      moveElevator('.elevator2', height);
+    };
+
+    window.onclickb = function(height) {
+      moveElevator('.elevator1', height);
+    };
+
+    window.onclickc = function(height) {
+      moveElevator('.elevator3', height);
+    };
+  </script>
+</body>
+</html>

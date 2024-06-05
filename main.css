@@ -1,0 +1,60 @@
+﻿.blackline {
+height: 7px;
+background-color: #000000;
+}
+    
+        /* עיצוב אלמנט המעלית */
+        .elevator {
+          
+            width: 50px;
+            height: 50px;
+
+            background-image: url('elv.png');
+            background-size: cover; 
+            background-repeat: no-repeat;
+            text-align: center;
+  
+            border: 1px solid black;
+            position: static;
+            bottom: 0; 
+            margin-left: 200px;
+            margin-top: 1900px;
+            background-image: url('elv.png');
+
+          }
+
+
+
+          @keyframes moveUp {
+            from {
+              transform: translateY(var(--end-pos));
+            }
+            to {
+              transform: translateY(var(--start-pos));
+            }
+          }
+      
+          .elevator-up {
+            animation: moveUp 2s forwards;
+            
+          }
+          @keyframes moveUpb {
+            from {
+              transform: translateY(-110px);
+            }
+            to {
+              transform: translateY(0);
+            }
+          }
+      
+          .elevator-upb {
+            animation: moveUpb 2s forwards;
+          }
+
+.box{
+    max-height: 900px;
+    overflow-y: auto; 
+    display: flex;
+}
+/* transform: translateY(var(--start-pos)); */
+/* elevator.style.setProperty('--start-pos', '0px'); */
